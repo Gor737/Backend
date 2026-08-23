@@ -1,0 +1,15 @@
+Hello Gor ^, how are you?
+
+Hello world! This is a streaming word counter test. 
+We want to make sure that words are counted correctly even when 
+a single word is split between two different chunks. 
+JavaScript Node.js streams are very useful for processing large files 
+without loading the entire file into memory. 
+This text contains multiple spaces, tabs	and
+new lines.
+
+Another important test is to have a verylongwordthatcouldbesplitacrosschunks 
+and then continue with more words after it.
+
+The counter should handle spaces, tabs, newlines, and multiple whitespace 
+characters correctly. Good luck!
