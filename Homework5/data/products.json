@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "Banana",
+    "price": 10,
+    "category": "food",
+    "stock": 270
+  },
+  {
+    "id": 2,
+    "name": "Apple",
+    "price": 2,
+    "category": "food",
+    "stock": 294
+  },
+  {
+    "id": 3,
+    "name": "MacBook",
+    "price": 1799,
+    "category": "laptop",
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "name": "banananananana",
+    "price": 4,
+    "category": "food"
+  },
+  {
+    "id": 5,
+    "name": "banananananananananana",
+    "price": 4,
+    "category": "food",
+    "stock": 44
+  }
+]
