@@ -41,10 +41,13 @@ router.post("/", autehnticate, validOrderItems, async (req, res) => {
 });
 
 router.get("/", autehnticate, async (req, res) => {
-  const { id } = req.user;
+  const { id, role } = req.user;
   const ordersPath = path.join(__dirname, "..", "data/orders.json");
   const orders = await readFile(ordersPath);
 
+  if(role === 'admin'){
+    return res.status(200).json(orders);
+  }
   const userOrders = orders.filter((order) => order.userId === Number(id));
 
   res.status(200).json(userOrders);

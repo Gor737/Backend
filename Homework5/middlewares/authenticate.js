@@ -14,7 +14,7 @@ const autehnticate = (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
-    return res.status(401).json({error: err});
+    return res.status(401).json({ error: "Authentication failed" });
   }
 };
 

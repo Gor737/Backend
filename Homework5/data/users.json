@@ -16,5 +16,11 @@
     "username": "Null",
     "passwordHash": "$2b$10$DUKWEpipYPcfqVFZmu5JhuxBXn6b15A8/O0M68dSAH4w6RUTuSUVq",
     "role": "customer"
+  },
+  {
+    "id": 4,
+    "username": "Nushik",
+    "passwordHash": "$2b$10$a23xsjVM2pWVjccQDpf.2OHefGHlcu3TOu3QMUzsxm3e6JFSUqIw.",
+    "role": "customer"
   }
 ]

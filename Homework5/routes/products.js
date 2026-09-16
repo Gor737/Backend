@@ -3,8 +3,8 @@ const path = require("node:path");
 const express = require("express");
 const authorize = require("../middlewares/authorize");
 const autehnticate = require("../middlewares/authenticate");
+const { error } = require("node:console");
 const router = express.Router();
-
 
 router.get("/", async (req, res) => {
   const dataPath = path.join(__dirname, "..", "data/products.json");
@@ -39,17 +39,21 @@ router.post("/", autehnticate, authorize("admin"), async (req, res) => {
     name: body.name,
     price: body.price,
     category: body.category,
-    stock: body.stock
-  }
+    stock: body.stock,
+  };
   products.push(product);
 
   await writeFile(dataPath, products);
-  res.status(201).json({ msg: "product appended succesfully" });
+  res.status(201).json({ msg: "product appended successfully" });
 });
 
 router.put("/:id", autehnticate, authorize("admin"), async (req, res) => {
   const { id } = req.params;
   const { category, name, price, stock } = req.body;
+
+  if (!category || !name || !price || stock === undefined)
+    return res.status(400).json({ error: "product fields must be required" });
+
   const dataPath = path.join(__dirname, "..", "data/products.json");
   const products = await readFile(dataPath);
   const productIdx = products.findIndex((p) => p.id === Number(id));
@@ -65,7 +69,7 @@ router.put("/:id", autehnticate, authorize("admin"), async (req, res) => {
   };
 
   await writeFile(dataPath, products);
-  res.status(200).json({ msg: "product updated succesfully" });
+  res.status(200).json({ msg: "product updated successfully" });
 });
 
 router.patch("/:id", autehnticate, authorize("admin"), async (req, res) => {
@@ -83,7 +87,7 @@ router.patch("/:id", autehnticate, authorize("admin"), async (req, res) => {
   if (stock !== undefined) products[productIdx].stock = stock;
 
   await writeFile(dataPath, products);
-  res.status(200).json({ msg: "product is updated succesfully" });
+  res.status(200).json({ msg: "product is updated successfully" });
 });
 
 router.delete("/:id", autehnticate, authorize("admin"), async (req, res) => {
@@ -91,10 +95,11 @@ router.delete("/:id", autehnticate, authorize("admin"), async (req, res) => {
   const dataPath = path.join(__dirname, "..", "data/products.json");
   const products = await readFile(dataPath);
   const newProducts = products.filter((p) => p.id !== Number(id));
-  if(products.length === newProducts.length) return res.status(404).json({error: "Cannot find product"})
+  if (products.length === newProducts.length)
+    return res.status(404).json({ error: "Cannot find product" });
 
   await writeFile(dataPath, newProducts);
-  res.status(200).json({ msg: "product is deleted succesfully" });
+  res.status(204).send();
 });
 
 module.exports = router;

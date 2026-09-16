@@ -11,14 +11,14 @@
     "name": "Apple",
     "price": 2,
     "category": "food",
-    "stock": 294
+    "stock": 291
   },
   {
     "id": 3,
     "name": "MacBook",
     "price": 1799,
     "category": "laptop",
-    "stock": 10
+    "stock": 9
   },
   {
     "id": 4,

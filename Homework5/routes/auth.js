@@ -12,6 +12,12 @@ router.post("/register", async (req, res) => {
     return res.status(400).json({ error: "username or password is required" });
   const usersPath = path.join(__dirname, "..", "data/users.json");
   const users = await readFile(usersPath);
+
+  const haveUser = users.find((u) => u.username === username);
+  if (haveUser)
+    return res.status(400).json({ error: "user alredy declareyed" });
+
+
   const passwordHash = await bcrypt.hash(password, 10);
   const newUser = {
     id: users.length ? users[users.length - 1].id + 1 : 1,
@@ -19,9 +25,6 @@ router.post("/register", async (req, res) => {
     passwordHash,
     role: "customer",
   };
-  const haveUser = users.find((u) => u.username === username);
-  if (haveUser)
-    return res.status(400).json({ error: "user alredy declareyed" });
 
   users.push(newUser);
   await writeFile(usersPath, users);
